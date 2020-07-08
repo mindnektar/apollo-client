@@ -374,10 +374,12 @@ export class ObservableQuery<
               variables: combinedOptions.variables as TVariables,
             }),
           );
+          this.queryManager.removeObservableQuery(qid);
           this.queryManager.stopQuery(qid);
           return fetchMoreResult as ApolloQueryResult<TData>;
         },
         error => {
+          this.queryManager.removeObservableQuery(qid);
           this.queryManager.stopQuery(qid);
           throw error;
         },
